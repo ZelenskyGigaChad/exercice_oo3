@@ -1,17 +1,19 @@
-
-#Renaud Deschenes
-#401
+# Renaud Deschenes
+# 401
 import random
+
 
 def chiffre():
     nouvelle_liste = []
     for i in range(4):
-        i = random.randint(1,6)
+        i = random.randint(1, 6)
         nouvelle_liste.append(i)
     nouvelle_liste.sort()
     nouvelle_liste.pop(0)
     nombre = sum(nouvelle_liste)
     return nombre
+
+
 class NPC:
     def __init__(self):
         self.force = chiffre()
@@ -28,28 +30,39 @@ class NPC:
         self.profession = str
 
     def afficher_caracteristique(self):
-        print('force: ',self.force, '\nagilite: ', self.agilite, '\nconstitution: ', self.constitution,'\nintelligence: ', self.intelligence, '\nsagesse:', self.sagesse, '\ncharisme:', self.charisme, '\nclasse d armure: ', self.classe_armure, '\nnom: ', self.nom, '\nrace: ', self.race, '\nespece: ',self.espece, '\npoint de vie: ',self.point_de_vie, '\nprofession: ', self.profession)
+        print('force: ', self.force, '\nagilite: ', self.agilite, '\nconstitution: ', self.constitution,
+              '\nintelligence: ', self.intelligence, '\nsagesse:', self.sagesse, '\ncharisme:', self.charisme,
+              '\nclasse d armure: ', self.classe_armure, '\nnom: ', self.nom, '\nrace: ', self.race, '\nespece: ',
+              self.espece, '\npoint de vie: ', self.point_de_vie, '\nprofession: ', self.profession)
+
+
 class kobold(NPC):
     def __init__(self):
         super().__init__()
+
     def attaque(self, cible):
         return
+
     def subir_dommage(self, recevoir_dommage):
-         
+        return
 
 
 class hero(NPC):
     def __init__(self):
         super().__init__()
+
     def attaque(self, cible):
         de = random.randint(1, 20)
         if de == 20:
-            degat = random.randint(1,8)
-            cible.subir_dommage(degat)
+            cible.subir_dommage(random.randint(1, 8))
+        elif de == 1:
+            print('vous avez raté votre attaque')
 
         elif 19 > de < 2 and cible.classe_armure < de:
             degat = random.randint(1, 6)
-            return cible.subir_dommage(degat)
+            cible.subir_dommage(random.randint(1, 6))
+        else:
+            print('vous avez raté votre attaque')
 
     def subir_dommage(self, recevoir_dommage):
         return
