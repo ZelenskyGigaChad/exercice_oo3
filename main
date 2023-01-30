@@ -1,11 +1,11 @@
 # Renaud Deschenes
 # 401
-#On importe les modules
+#On importe les librairies, en l'occurence, juste random
 import random
 
-#On crée la fonction pour trouver les caractéristiques des personnages
+#On crée la fonction pour trouver les caractéristiques de tout les personnages
 def chiffre():
-#On crée une liste vide
+#On fait une liste vide
     nouvelle_liste = []
 #On crée une boucle pour trouver 4 chiffres aléatoires entre 1 et 6
     for i in range(4):
