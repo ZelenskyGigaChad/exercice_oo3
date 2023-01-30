@@ -1,21 +1,31 @@
 # Renaud Deschenes
 # 401
+#On importe les modules
 import random
 
-
+#On crée la fonction pour trouver les caractéristiques des personnages
 def chiffre():
+#On crée une liste vide
     nouvelle_liste = []
+#On crée une boucle pour trouver 4 chiffres aléatoires entre 1 et 6
     for i in range(4):
         i = random.randint(1, 6)
+#On ajoute les chiffres à la liste
         nouvelle_liste.append(i)
+#On trie la liste
     nouvelle_liste.sort()
+#On enlève le plus petit chiffre
     nouvelle_liste.pop(0)
+#On additionne les chiffres restants
     nombre = sum(nouvelle_liste)
+#On retourne le résultat
     return nombre
 
-
+#On crée la classe pour les NPC
 class NPC:
+#On initialise les attributs
     def __init__(self):
+#On appelle la fonction chiffre pour trouver les caractéristiques
         self.force = chiffre()
         self.agilite = chiffre()
         self.constitution = chiffre()
@@ -28,41 +38,50 @@ class NPC:
         self.espece = str
         self.point_de_vie = random.randint(1, 20)
         self.profession = str
-
+#On crée la fonction pour afficher les caractéristiques
     def afficher_caracteristique(self):
+#On affiche les caractéristiques
         print('force: ', self.force, '\nagilite: ', self.agilite, '\nconstitution: ', self.constitution,
               '\nintelligence: ', self.intelligence, '\nsagesse:', self.sagesse, '\ncharisme:', self.charisme,
               '\nclasse d armure: ', self.classe_armure, '\nnom: ', self.nom, '\nrace: ', self.race, '\nespece: ',
               self.espece, '\npoint de vie: ', self.point_de_vie, '\nprofession: ', self.profession)
 
-
+#On crée la classe pour les ennemies, qui est un enfant de la classe NPC
 class kobold(NPC):
+#On initialise les attributs
     def __init__(self):
         super().__init__()
-
+#On crée la fonction pour attaquer
     def attaque(self, cible):
         return
-
+#On crée la fonction pour subir des dégâts
     def subir_dommage(self, recevoir_dommage):
-        return
+        self.point_de_vie -= recevoir_dommage
 
-
+#On cree une autre class pour les héros, qui est un enfant de la classe NPC
 class hero(NPC):
+#On initialise les attributs
     def __init__(self):
         super().__init__()
-
+#On crée la fonction pour attaquer
     def attaque(self, cible):
+#On roule un dé de 20
         de = random.randint(1, 20)
+        print('DE', de)
+#On crée une condition pour voir si le dé est egal à 20
         if de == 20:
+#Si le dé est égal à 20, on fait subir les degats au kobold avec un dé de 8
             cible.subir_dommage(random.randint(1, 8))
-        elif de == 1:
-            print('vous avez raté votre attaque')
-
-        elif 19 > de < 2 and cible.classe_armure < de:
-            degat = random.randint(1, 6)
+#Si le de est entre 19 et 2, et que cest plus grand que la classe darmure, on fait subir les degats au kobold avec un dé de 6
+        elif 19 >= de >= 2 and cible.classe_armure < de:
             cible.subir_dommage(random.randint(1, 6))
-        else:
-            print('vous avez raté votre attaque')
-
+#On cree une fonction pour subir des degats, qui ne fait rien pour linstant
     def subir_dommage(self, recevoir_dommage):
         return
+
+h = hero()
+k= kobold()
+h.afficher_caracteristique()
+k.attaque(h)
+h.afficher_caracteristique()
+
